@@ -72,7 +72,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-purple-100 overflow-hidden">
-      <div className="container max-w-5xl mx-auto px-4 py-12 relative">
+      <div className="container hidden sm:block max-w-5xl mx-auto px-4 py-12 relative">
         {/* Background Elements */}
         {/* Background Elements */}
         {showWelcome && (
