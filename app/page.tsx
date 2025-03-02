@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Sparkles, Star, Heart } from "lucide-react"
+import Image from "next/image"
 
 const FloatingElement = ({
   children,
@@ -22,9 +23,17 @@ const FloatingElement = ({
   return (
     <motion.div
       drag
-      dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
-      initial={{ x: initialX, y: initialY }}
+      dragMomentum={false} // Prevents it from flying off
+      whileHover={{ scale: 1.1 }}
+      whileDrag={{ scale: 1.2 }}
+      onDragEnd={(event, info) => {
+        // Reset the position when dragging stops
+        if (event.currentTarget) {
+          (event.currentTarget as HTMLElement).style.transform = `translate(${initialX}px, ${initialY}px)`
+        }
+      }}
       animate={{
+        x: initialX,
         y: [initialY, initialY + 20, initialY],
       }}
       transition={{
@@ -35,8 +44,6 @@ const FloatingElement = ({
           ease: "easeInOut",
         },
       }}
-      whileHover={{ scale: 1.1 }}
-      whileDrag={{ scale: 1.2 }}
       className="absolute cursor-grab active:cursor-grabbing"
       style={{ zIndex: 40 }}
     >
@@ -44,6 +51,7 @@ const FloatingElement = ({
     </motion.div>
   )
 }
+
 
 export default function Home() {
   const router = useRouter()
@@ -66,21 +74,35 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-purple-100 overflow-hidden">
       <div className="container max-w-5xl mx-auto px-4 py-12 relative">
         {/* Background Elements */}
-        <FloatingElement initialX={-150} initialY={-100}>
-          <Heart className="h-8 w-8 text-pink-400 fill-pink-400" />
-        </FloatingElement>
+        {/* Background Elements */}
+        {showWelcome && (
+          <>
+            <FloatingElement initialX={730} initialY={240}>
+              <Image
+                src="/assets/images/stethoscope.png"
+                alt="Stethoscope"
+                width={100}
+                height={100}
+                draggable="false"
+                className="max-w-none"
+              />
+            </FloatingElement>
 
-        <FloatingElement initialX={150} initialY={-150}>
-          <Star className="h-10 w-10 text-yellow-400 fill-yellow-400" />
-        </FloatingElement>
+            <FloatingElement initialX={182} initialY={61}>
+              <Image
+                src="/assets/images/pink-heart.png"
+                alt="Heart"
+                width={100}
+                height={100}
+                draggable="false"
+                className="max-w-none"
+              />
+            </FloatingElement>
+          </>
+        )}
 
-        <FloatingElement initialX={-200} initialY={100}>
-          <Sparkles className="h-12 w-12 text-purple-400" />
-        </FloatingElement>
 
-        <FloatingElement initialX={200} initialY={150}>
-          <Heart className="h-10 w-10 text-pink-500 fill-pink-500" />
-        </FloatingElement>
+
 
         <AnimatePresence mode="wait">
           {showWelcome ? (
@@ -98,9 +120,15 @@ export default function Home() {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2, type: "spring" }}
-                    className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center"
+                    className="w-24 h-24 mx-auto mb-10 rounded-full"
                   >
-                    <Sparkles className="h-10 w-10 text-white" />
+                    <Image
+                      src="/assets/images/logohome.png"
+                      alt="Biological E"
+                      width={90}
+                      height={90}
+                      className=""
+                    />
                   </motion.div>
 
                   <form onSubmit={handleNameSubmit} className="space-y-6">
