@@ -747,6 +747,9 @@ video {
 .h-full {
   height: 100%;
 }
+.h-40 {
+  height: 10rem;
+}
 .max-h-\[calc\(100\%-8rem\)\] {
   max-height: calc(100% - 8rem);
 }
@@ -791,6 +794,9 @@ video {
 }
 .w-full {
   width: 100%;
+}
+.w-40 {
+  width: 10rem;
 }
 .min-w-0 {
   min-width: 0px;
@@ -951,6 +957,10 @@ video {
 .border-white\/70 {
   border-color: rgb(255 255 255 / 0.7);
 }
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
 .bg-background {
   background-color: hsl(var(--background));
 }
@@ -991,6 +1001,9 @@ video {
 }
 .bg-gradient-to-t {
   background-image: linear-gradient(to top, var(--tw-gradient-stops));
+}
+.bg-\[url\(\'https\:\/\/cdn\.pixabay\.com\/photo\/2022\/04\/25\/05\/10\/sky-7155060_1280\.png\'\)\] {
+  background-image: url('https://cdn.pixabay.com/photo/2022/04/25/05/10/sky-7155060_1280.png');
 }
 .from-pink-400 {
   --tw-gradient-from: #f472b6 var(--tw-gradient-from-position);
@@ -1052,8 +1065,14 @@ video {
 .to-transparent {
   --tw-gradient-to: transparent var(--tw-gradient-to-position);
 }
+.bg-contain {
+  background-size: contain;
+}
 .bg-clip-text {
   background-clip: text;
+}
+.bg-no-repeat {
+  background-repeat: no-repeat;
 }
 .fill-yellow-100 {
   fill: #fef9c3;
@@ -1069,6 +1088,9 @@ video {
 }
 .p-8 {
   padding: 2rem;
+}
+.p-2 {
+  padding: 0.5rem;
 }
 .px-3 {
   padding-left: 0.75rem;
