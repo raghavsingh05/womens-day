@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Download, Share2, Home, Heart } from "lucide-react"
+import { Download, Share2, Home } from "lucide-react"
 import html2canvas from "html2canvas"
 
 export default function CardPage() {
@@ -14,6 +14,7 @@ export default function CardPage() {
   const cardRef = useRef<HTMLDivElement>(null)
   const [isDownloading, setIsDownloading] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [username, setUsername] = useState<string>("@DR. RITIKA SHARMA")
 
   useEffect(() => {
     // Check if we're on mobile
@@ -30,10 +31,14 @@ export default function CardPage() {
     // Load saved data
     const savedImage = localStorage.getItem("womensDay_image")
     const savedAnswers = localStorage.getItem("womensDay_answers")
+    const savedUsername = localStorage.getItem("doctorName")
 
     if (savedImage && savedAnswers) {
       setImage(savedImage)
       setAnswers(JSON.parse(savedAnswers))
+      if (savedUsername) {
+        setUsername(savedUsername)
+      }
     } else {
       router.push("/")
     }
@@ -99,61 +104,30 @@ export default function CardPage() {
     }
   }
 
-  // Desktop positions for the cloud answers
-  const desktopPositions = [
-    { top: "18%", left: "25%", rotate: "-3deg", scale: 0.9 },
-    { top: "18%", left: "75%", rotate: "2deg", scale: 0.85 },
-    { top: "28%", left: "50%", rotate: "-2deg", scale: 0.9 },
-    { top: "70%", left: "25%", rotate: "3deg", scale: 0.85 },
-    { top: "70%", left: "75%", rotate: "-3deg", scale: 0.9 },
-    { top: "80%", left: "50%", rotate: "2deg", scale: 0.85 },
-    { top: "38%", left: "20%", rotate: "-2deg", scale: 0.8 },
-    { top: "38%", left: "80%", rotate: "3deg", scale: 0.8 },
-    { top: "60%", left: "20%", rotate: "-2deg", scale: 0.85 },
-    { top: "60%", left: "80%", rotate: "2deg", scale: 0.9 },
+  // Convert answers to an array of strings for display
+  const answersList = Object.values(answers)
+
+  // Font sizes for different answers to create visual interest
+  const fontSizes = [
+    "text-lg md:text-xl font-bold",
+    "text-base md:text-lg font-medium",
+    "text-xl md:text-2xl font-bold",
+    "text-base md:text-lg font-medium",
+    "text-lg md:text-xl font-semibold",
+    "text-xl md:text-2xl font-bold",
+    "text-base md:text-lg font-medium",
   ]
 
-  // Mobile positions - more spread out and smaller scale
-  const mobilePositions = [
-    { top: "15%", left: "30%", rotate: "-3deg", scale: 0.6 },
-    { top: "15%", left: "70%", rotate: "2deg", scale: 0.6 },
-    { top: "25%", left: "50%", rotate: "-2deg", scale: 0.6 },
-    { top: "75%", left: "30%", rotate: "3deg", scale: 0.6 },
-    { top: "75%", left: "70%", rotate: "-3deg", scale: 0.6 },
-    { top: "85%", left: "50%", rotate: "2deg", scale: 0.6 },
-    { top: "35%", left: "25%", rotate: "-2deg", scale: 0.6 },
-    { top: "35%", left: "75%", rotate: "3deg", scale: 0.6 },
-    { top: "65%", left: "25%", rotate: "-2deg", scale: 0.6 },
-    { top: "65%", left: "75%", rotate: "2deg", scale: 0.6 },
+  // Colors for different answers
+  const textColors = [
+    "text-pink-600",
+    "text-purple-700",
+    "text-pink-500",
+    "text-purple-600",
+    "text-pink-700",
+    "text-purple-800",
+    "text-pink-500",
   ]
-
-  // Use appropriate positions based on screen size
-  const positions = isMobile ? mobilePositions : desktopPositions
-
-  // Flower decorations - reduced for mobile
-  const desktopFlowers = [
-    { top: "5%", left: "5%", emoji: "🌸", rotate: "0deg", scale: 1.2 },
-    { top: "5%", left: "95%", emoji: "🌷", rotate: "15deg", scale: 1.3 },
-    { top: "95%", left: "5%", emoji: "🌹", rotate: "-10deg", scale: 1.2 },
-    { top: "95%", left: "95%", emoji: "🌺", rotate: "10deg", scale: 1.3 },
-    { top: "50%", left: "3%", emoji: "💐", rotate: "5deg", scale: 1.2 },
-    { top: "50%", left: "97%", emoji: "🌻", rotate: "-5deg", scale: 1.3 },
-    { top: "10%", left: "30%", emoji: "🌼", rotate: "8deg", scale: 0.9 },
-    { top: "10%", left: "70%", emoji: "🌸", rotate: "-8deg", scale: 0.9 },
-    { top: "90%", left: "30%", emoji: "🌷", rotate: "-5deg", scale: 0.9 },
-    { top: "90%", left: "70%", emoji: "🌹", rotate: "5deg", scale: 0.9 },
-  ]
-
-  const mobileFlowers = [
-    { top: "5%", left: "5%", emoji: "🌸", rotate: "0deg", scale: 0.8 },
-    { top: "5%", left: "95%", emoji: "🌷", rotate: "15deg", scale: 0.8 },
-    { top: "95%", left: "5%", emoji: "🌹", rotate: "-10deg", scale: 0.8 },
-    { top: "95%", left: "95%", emoji: "🌺", rotate: "10deg", scale: 0.8 },
-    { top: "50%", left: "3%", emoji: "💐", rotate: "5deg", scale: 0.8 },
-    { top: "50%", left: "97%", emoji: "🌻", rotate: "-5deg", scale: 0.8 },
-  ]
-
-  const flowers = isMobile ? mobileFlowers : desktopFlowers
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-100 to-purple-200 py-6 px-3 md:py-8 md:px-4">
@@ -167,144 +141,111 @@ export default function CardPage() {
             {/* Card Container - portrait oriented */}
             <div
               ref={cardRef}
-              className="relative w-full aspect-[3/5] rounded-3xl overflow-hidden shadow-[0_10px_50px_rgba(236,72,153,0.4)]"
+              className="relative w-full aspect-[9/16] rounded-xl overflow-hidden shadow-[0_10px_50px_rgba(236,72,153,0.4)]"
             >
-              {/* Background with gradient */}
-              <div className="absolute inset-0 bg-gradient-to-b from-pink-200 via-purple-100 to-pink-200" />
-
-              {/* Decorative pattern overlay */}
-              <div className="absolute inset-0 z-0">
+              {/* Background with custom image */}
+              <div className="absolute inset-0">
                 <Image
-                  src="/assets/images/background.jpg"
+                  src="/assets/images/pinkbackground.jpg"
                   alt="Card background"
-                  fill
+                  layout="fill"
                   className="object-cover"
                   priority
                 />
+
+                {/* Overlay to ensure text readability */}
+                <div className="absolute inset-0 "></div>
               </div>
 
-              {/* Decorative border */}
-              <div className="absolute inset-0 border-[8px] md:border-[12px] border-white rounded-3xl pointer-events-none" />
+              {/* Decorative elements */}
+              {/* <div className="absolute top-0 right-0 w-1/3 h-1/3 opacity-80">
+                <Image
+                  src="/assets/images/mainbg.jpg"
+                  alt="Rose decoration"
+                  width={150}
+                  height={150}
+                  className="object-contain"
+                />
+              </div> */}
 
-              {/* Inner decorative border */}
-              <div className="absolute inset-[8px] md:inset-[12px] border-[1px] md:border-[2px] border-pink-300 rounded-2xl pointer-events-none" />
+              {/* Lotus flower decoration */}
+              {/* <div className="absolute bottom-1/4 left-4 w-24 h-24 opacity-80">
+                <svg viewBox="0 0 100 100" className="w-full h-full text-white">
+                  <path
+                    d="M50,0 C60,30 90,40 90,60 C90,80 70,90 50,90 C30,90 10,80 10,60 C10,40 40,30 50,0"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+              </div> */}
 
-              {/* Flower decorations */}
-              {flowers.map((flower, index) => (
-                <div
-                  key={`flower-${index}`}
-                  className="absolute"
-                  style={{
-                    top: flower.top,
-                    left: flower.left,
-                    transform: `translate(-50%, -50%) rotate(${flower.rotate}) scale(${flower.scale})`,
-                    zIndex: 5,
-                    fontSize: "1.5rem",
-                  }}
-                >
-                  {flower.emoji}
+              {/* Title Section with enhanced styling */}
+              {/* <div className="absolute top-0 left-0 right-0 pt-6 px-4 text-center">
+                {/* <div className="bg-pink-100/80 backdrop-blur-2xl py-2 rounded-lg shadow-sm inline-block px-6 mx-auto">
+                  <h2 className="text-xl md:text-2xl font-bold text-pink-600 uppercase tracking-wide ">
+                    International
+                    <br />
+                    Women's Day
+                  </h2>
+                </div> 
+                <div className="mt-4">
+                  <h3 className="text-lg md:text-xl font-medium text-pink-700 bg-white/70 backdrop-blur-sm py-1 px-4 rounded-full inline-block shadow-sm">
+                    Beyond the white coat: My life
+                  </h3>
                 </div>
-              ))}
+              </div> */}
 
-              {/* Title Banner */}
-              <div className="absolute top-4 md:top-6 left-1/2 transform -translate-x-1/2 z-10 w-11/12">
-                <div className="bg-white/90 backdrop-blur-sm py-2 md:py-3 px-3 md:px-4 rounded-full shadow-lg border-2 border-pink-200">
-                  <h2 className="text-center text-base md:text-xl font-bold text-pink-600">Happy Women's Day</h2>
+              {/* White Card with Answers - more visually interesting */}
+              <div className="m-6 absolute top-1/4 left-4 right-4 p-4">
+                <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-center">
+                  {answersList.slice(0, 6).map((answer, index) => (
+                    <div
+                      key={index}
+                      className={`${textColors[index % textColors.length]} text-sm md:text-base lg:text-lg transform ${index % 2 === 0 ? "rotate-1" : "-rotate-1"
+                        } hover:scale-105 transition-transform`}
+                    >
+                      {answer}
+                    </div>
+                  ))}
+
+                  {/* Last answer as a full-width item with special styling */}
+                  {answersList.length > 6 && (
+                    <div className="w-full text-center text-sm md:text-lg text-pink-600 font-medium px-2 rounded-md">
+                      {answersList[6]}
+                    </div>
+                  )}
                 </div>
               </div>
 
-              {/* Answer Clouds */}
-              {Object.entries(answers).map(([id, answer], index) => {
-                const pos = positions[index % positions.length]
-                return (
-                  <div
-                    key={id}
-                    className="absolute"
-                    style={{
-                      top: pos.top,
-                      left: pos.left,
-                      transform: `translate(-50%, -50%) rotate(${pos.rotate}) scale(${pos.scale})`,
-                      zIndex: 10,
-                    }}
-                  >
-                    <div className="relative w-32 h-24">
-                      {/* Cloud background */}
-                      <Image
-                        src="/assets/images/cloud.png"
-                        alt="Cloud background"
-                        fill
-                        className="object-contain"
-                        sizes="128px"
-                      />
 
-                      {/* Text content */}
-                      <div className="absolute inset-0 flex items-center justify-center p-4">
-                        <p className="text-pink-800 text-xs font-medium text-center drop-shadow-sm">
-                          {isMobile && answer.length > 30 ? `${answer.substring(0, 30)}...` : answer}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
-
-              {/* Center User Image with decorative frame - SMALLER */}
-              {image && (
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-                  {/* Decorative outer ring */}
-                  <div className="relative w-32 h-32 md:w-48 md:h-48 rounded-full bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 p-2 shadow-[0_0_30px_rgba(219,39,119,0.6)]">
-                    {/* Decorative middle ring */}
-                    <div className="absolute inset-0 rounded-full border-[4px] md:border-[6px] border-white/70 m-1" />
-
-                    {/* Inner white border */}
-                    <div className="absolute inset-2 rounded-full bg-white p-1">
-                      {/* Actual image container */}
-                      <div className="relative w-full h-full rounded-full overflow-hidden">
-                        <Image
-                          src={image || "/placeholder.svg"}
-                          alt="Your photo"
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 128px, 192px"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Decorative hearts around the image - fewer on mobile */}
-                    {[...Array(isMobile ? 4 : 8)].map((_, i) => {
-                      const angle = i * (isMobile ? 90 : 45) * (Math.PI / 180)
-                      const radius = isMobile ? 50 : 80
-                      const x = Math.cos(angle) * radius
-                      const y = Math.sin(angle) * radius
-                      return (
-                        <div
-                          key={`heart-${i}`}
-                          className="absolute"
-                          style={{
-                            top: `calc(50% + ${y}px)`,
-                            left: `calc(50% + ${x}px)`,
-                            transform: "translate(-50%, -50%)",
-                          }}
-                        >
-                          <Heart
-                            fill={i % 2 === 0 ? "#ec4899" : "#c026d3"}
-                            className="w-4 h-4 md:w-5 md:h-5 text-pink-500 drop-shadow-md"
-                          />
-                        </div>
-                      )
-                    })}
+              {/* Profile Image - moved to bottom right */}
+              <div className="absolute bottom-14 right-4">
+                <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full bg-white p-1 shadow-lg border-2 border-pink-300">
+                  <div className="relative w-full h-full rounded-full overflow-hidden">
+                    <Image
+                      src={image || "/placeholder.svg?height=100&width=100"}
+                      alt="Your photo"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 96px, 112px"
+                    />
                   </div>
                 </div>
-              )}
 
-              {/* Bottom Quote */}
-              <div className="absolute bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 z-10 w-11/12">
-                <div className="bg-white/90 backdrop-blur-sm py-2 md:py-3 px-3 md:px-4 rounded-full shadow-lg border-2 border-pink-200">
-                  <p className="text-center text-xs md:text-sm font-bold text-purple-700">
-                    Celebrating You—Strong, Balanced & Unbreakable!
-                  </p>
+                {/* Username with enhanced styling */}
+                <div className="mt-2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm text-center border border-pink-200 transform -translate-x-1/4">
+                  <p className="text-xs md:text-sm text-pink-600 font-medium">@Dr. {username}</p>
                 </div>
               </div>
+
+              {/* Footer with enhanced styling */}
+              {/* <div className="absolute bottom-4 left-0 right-0 text-center">
+                <p className="text-xs text-gray-700 bg-white/80 backdrop-blur-sm py-1 px-4 rounded-full inline-block shadow-sm">
+                  From the makers of <span className="font-bold">BITOL</span>
+                  <sup>®</sup>
+                </p>
+              </div> */}
             </div>
           </div>
         </div>
