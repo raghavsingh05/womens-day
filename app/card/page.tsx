@@ -220,7 +220,7 @@ export default function CardPage() {
 
 
               {/* Profile Image - moved to bottom right */}
-              <div className="absolute bottom-12 right-[-10%]">
+              <div className="absolute sm:bottom-14 bottom-12 sm:right-1 right-[-10%]">
                 <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full bg-white p-1 shadow-lg border-2 border-pink-300">
                   <div className="relative w-full h-full rounded-full overflow-hidden">
                     <Image
@@ -234,7 +234,7 @@ export default function CardPage() {
                 </div>
 
                 {/* Username with enhanced styling */}
-                <div className="mt-2 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm text-center border border-pink-200 transform -translate-x-1/4">
+                <div className="mt-2 bg-white/90 backdrop-blur-sm px-3 pb-4 py-1 rounded-lg shadow-sm text-center border border-pink-200 transform -translate-x-1/4">
                   <p className="text-xs md:text-sm text-pink-600 font-medium">@Dr. {username}</p>
                 </div>
               </div>
