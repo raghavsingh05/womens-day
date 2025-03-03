@@ -37,22 +37,18 @@ const questions = [
   },
   {
     id: 5,
-    question: "What's the one piece of advice you'd give to your younger self?",
-    type: "text",
-    placeholder: 'e.g., "Put yourself first sometimes," "Take more risks," "Save more, spend smart"...',
-  },
-  {
-    id: 6,
     question: "What is your passion outside medicine?",
     type: "text",
     placeholder: "e.g., Classical Dance, Public speaking, Investing, Photography, Writing a book...",
   },
   {
-    id: 7,
-    question: "One word of advice you would give to your patients.",
+    id: 6,
+    question: "What's the one piece of advice you'd give to your younger self?",
     type: "text",
-    placeholder: "Share your wisdom...",
+    placeholder: 'e.g., "Put yourself first sometimes," "Take more risks," "Save more, spend smart"...',
   },
+  
+  
 ]
 
 export default function QuestionsPage() {
@@ -75,7 +71,9 @@ export default function QuestionsPage() {
 
   const handleNext = () => {
     const trimmedAnswer = currentAnswer.trim()
-    if (trimmedAnswer && trimmedAnswer.length <= 20) {
+    const maxLength = currentQuestion === questions.length - 1 ? 25 : 20
+    
+    if (trimmedAnswer && trimmedAnswer.length <= maxLength) {
       setAnswers({ ...answers, [questions[currentQuestion].id]: trimmedAnswer })
 
       if (currentQuestion < questions.length - 1) {
@@ -102,10 +100,13 @@ export default function QuestionsPage() {
     }
   }
 
-  const isAnswerValid = currentAnswer.trim().length <= 20
+  const isAnswerValid = () => {
+    const maxLength = currentQuestion === questions.length - 1 ? 25 : 20
+    return currentAnswer.trim().length <= maxLength
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-100 to-pink-100 py-12">
+    <div className="min-h-screen bg-gradient-to-b from-purple-100 to-pink-100 py-12 questions-container">
       <div className="container max-w-3xl mx-auto px-4">
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-8 space-y-2">
           <h2 className="text-2xl font-bold text-gray-800">Hello, Dr. {doctorName}!</h2>
@@ -142,17 +143,17 @@ export default function QuestionsPage() {
                     <Input
                       placeholder={questions[currentQuestion].placeholder}
                       className={`border-pink-200 focus:border-pink-400 focus:ring-pink-400 ${
-                        !isAnswerValid ? 'border-red-500' : ''
+                        !isAnswerValid() ? 'border-red-500' : ''
                       }`}
                       value={currentAnswer}
                       onChange={(e) => setCurrentAnswer(e.target.value)}
-                      maxLength={20}
+                      maxLength={currentQuestion === questions.length - 1 ? 25 : 20}
                     />
                   )}
 
-                  {!isAnswerValid && (
+                  {!isAnswerValid() && (
                     <p className="text-red-500 text-sm mt-2">
-                      Answer should not exceed 20 characters
+                      Answer should not exceed {currentQuestion === questions.length - 1 ? 25 : 20} characters
                     </p>
                   )}
 
@@ -168,7 +169,7 @@ export default function QuestionsPage() {
 
                     <Button
                       onClick={handleNext}
-                      disabled={!currentAnswer.trim() || !isAnswerValid}
+                      disabled={!currentAnswer.trim() || !isAnswerValid()}
                       className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
                     >
                       {currentQuestion < questions.length - 1 ? "Next" : "Finish"}

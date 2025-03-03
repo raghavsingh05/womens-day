@@ -12,7 +12,7 @@ const baseSize = {
   xs: 'text-xs sm:text-sm md:text-base',
   sm: 'text-sm sm:text-base md:text-lg',
   md: 'text-base sm:text-lg md:text-xl',
-  lg: 'text-lg sm:text-xl md:text-2xl',
+  lg: 'text-xl sm:text-xl md:text-2xl',
 }
 
 export default function CardPage() {
@@ -140,13 +140,15 @@ export default function CardPage() {
 
   // Add this function to generate random size class
   const getRandomSize = () => {
-    const sizes = ['sm', 'md', 'lg'] as const
+    const sizes = ['xs', 'sm', 'md', 'lg'] as const
     const randomIndex = Math.floor(Math.random() * sizes.length)
     const randomOffset = Math.floor(Math.random() * 6) // 0 to 5
-    const scale = 95 + randomOffset * 10
     
+    // Different scaling for mobile and larger screens
     return `${baseSize[sizes[randomIndex]]} transform 
-      scale-${scale} sm:scale-${scale} md:scale-${scale + 5}` // Extra scaling for tablets
+      scale-${85 + randomOffset * 15} // Mobile: 85% to 160%
+      sm:scale-${90 + randomOffset * 10} // Tablet: 90% to 140%
+      md:scale-${95 + randomOffset * 8}` // Desktop: 95% to 135%
   }
 
   return (
@@ -218,21 +220,21 @@ export default function CardPage() {
 
               {/* White Card with Answers - more visually interesting */}
               <div className="sm:my-6 my-2 absolute top-1/4 left-4 right-4 p-4">
-                <div className="flex flex-wrap justify-center gap-x-1 sm:gap-x-3 md:gap-x-4 sm:gap-y-2 md:gap-y-3 text-center">
+                <div className="flex flex-wrap justify-center sm:gap-x-2 md:gap-x-3 gap-y-1 sm:gap-y-2 md:gap-y-3 text-center">
                   {answersList.slice(0, 6).map((answer, index) => (
                     <div
                       key={index}
                       className={`${textColors[index % textColors.length]} ${getRandomSize()} 
                         transform ${index % 2 === 0 ? "rotate-1" : "-rotate-1"} 
-                        hover:scale-105 transition-transform px-1 sm:px-2 md:px-3`}
+                        hover:scale-105 transition-transform px-0.5 sm:px-1 md:px-2`}
                     >
                       {answer}
                     </div>
                   ))}
 
                   {/* Last answer with responsive styling */}
-                  {answersList.length > 6 && (
-                    <div className="w-full text-center text-base sm:text-lg md:text-xl text-pink-600 font-medium px-2 rounded-md">
+                  {answersList.length > 5 && (
+                    <div className="w-full text-center text-lg sm:text-lg md:text-xl text-pink-600 font-medium px-2 rounded-md">
                       {answersList[6]}
                     </div>
                   )}
