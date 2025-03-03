@@ -19,13 +19,13 @@ const questions = [
   },
   {
     id: 2,
-    question: "One accessory you can’t live without?",
+    question: "One accessory you can't live without?",
     type: "text",
     placeholder: "e.g., Earrings, Smartwatch, Sunglasses...",
   },
   {
     id: 3,
-    question: "What’s the one thing that instantly uplifts your mood? ",
+    question: "What's the one thing that instantly uplifts your mood? ",
     type: "text",
     placeholder: "e.g., Music, A good book, Talking to a friend, A long walk...",
   },
@@ -37,7 +37,7 @@ const questions = [
   },
   {
     id: 5,
-    question: "What’s the one piece of advice you’d give to your younger self?",
+    question: "What's the one piece of advice you'd give to your younger self?",
     type: "text",
     placeholder: 'e.g., "Put yourself first sometimes," "Take more risks," "Save more, spend smart"...',
   },
@@ -49,7 +49,7 @@ const questions = [
   },
   {
     id: 7,
-    question: "On word of advice you would give to your patients.",
+    question: "One word of advice you would give to your patients.",
     type: "text",
     placeholder: "Share your wisdom...",
   },
@@ -74,8 +74,9 @@ export default function QuestionsPage() {
   const progress = ((currentQuestion + 1) / questions.length) * 100
 
   const handleNext = () => {
-    if (currentAnswer.trim()) {
-      setAnswers({ ...answers, [questions[currentQuestion].id]: currentAnswer })
+    const trimmedAnswer = currentAnswer.trim()
+    if (trimmedAnswer && trimmedAnswer.length <= 20) {
+      setAnswers({ ...answers, [questions[currentQuestion].id]: trimmedAnswer })
 
       if (currentQuestion < questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1)
@@ -85,7 +86,7 @@ export default function QuestionsPage() {
           "womensDay_answers",
           JSON.stringify({
             ...answers,
-            [questions[currentQuestion].id]: currentAnswer,
+            [questions[currentQuestion].id]: trimmedAnswer,
           }),
         )
         router.push("/upload")
@@ -100,6 +101,8 @@ export default function QuestionsPage() {
       setCurrentAnswer(answers[questions[currentQuestion - 1]?.id] || "")
     }
   }
+
+  const isAnswerValid = currentAnswer.trim().length <= 20
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-100 to-pink-100 py-12">
@@ -138,10 +141,19 @@ export default function QuestionsPage() {
                   ) : (
                     <Input
                       placeholder={questions[currentQuestion].placeholder}
-                      className="border-pink-200 focus:border-pink-400 focus:ring-pink-400"
+                      className={`border-pink-200 focus:border-pink-400 focus:ring-pink-400 ${
+                        !isAnswerValid ? 'border-red-500' : ''
+                      }`}
                       value={currentAnswer}
                       onChange={(e) => setCurrentAnswer(e.target.value)}
+                      maxLength={20}
                     />
+                  )}
+
+                  {!isAnswerValid && (
+                    <p className="text-red-500 text-sm mt-2">
+                      Answer should not exceed 20 characters
+                    </p>
                   )}
 
                   <div className="flex justify-between mt-8">
@@ -156,7 +168,7 @@ export default function QuestionsPage() {
 
                     <Button
                       onClick={handleNext}
-                      disabled={!currentAnswer.trim()}
+                      disabled={!currentAnswer.trim() || !isAnswerValid}
                       className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
                     >
                       {currentQuestion < questions.length - 1 ? "Next" : "Finish"}

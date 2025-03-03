@@ -8,6 +8,13 @@ import { Download, Share2, Home } from "lucide-react"
 import html2canvas from "html2canvas"
 import 'html2canvas-objectfit-fix';
 
+const baseSize = {
+  xs: 'text-xs sm:text-sm md:text-base',
+  sm: 'text-sm sm:text-base md:text-lg',
+  md: 'text-base sm:text-lg md:text-xl',
+  lg: 'text-lg sm:text-xl md:text-2xl',
+}
+
 export default function CardPage() {
   const router = useRouter()
   const [image, setImage] = useState<string | null>(null)
@@ -123,13 +130,24 @@ export default function CardPage() {
   // Colors for different answers
   const textColors = [
     "text-pink-600",
-    "text-purple-700",
+    "text-red-700",
     "text-pink-500",
-    "text-purple-600",
+    "text-pink-600",
     "text-pink-700",
-    "text-purple-800",
+    "text-pink-800",
     "text-pink-500",
   ]
+
+  // Add this function to generate random size class
+  const getRandomSize = () => {
+    const sizes = ['sm', 'md', 'lg'] as const
+    const randomIndex = Math.floor(Math.random() * sizes.length)
+    const randomOffset = Math.floor(Math.random() * 6) // 0 to 5
+    const scale = 95 + randomOffset * 10
+    
+    return `${baseSize[sizes[randomIndex]]} transform 
+      scale-${scale} sm:scale-${scale} md:scale-${scale + 5}` // Extra scaling for tablets
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-100 to-purple-200 py-6 px-3 md:py-8 md:px-4">
@@ -200,20 +218,21 @@ export default function CardPage() {
 
               {/* White Card with Answers - more visually interesting */}
               <div className="sm:my-6 my-2 absolute top-1/4 left-4 right-4 p-4">
-                <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-center">
+                <div className="flex flex-wrap justify-center gap-x-2 sm:gap-x-3 md:gap-x-4 gap-y-1 sm:gap-y-2 md:gap-y-3 text-center">
                   {answersList.slice(0, 6).map((answer, index) => (
                     <div
                       key={index}
-                      className={`${textColors[index % textColors.length]} text-sm md:text-base lg:text-lg transform ${index % 2 === 0 ? "rotate-1" : "-rotate-1"
-                        } hover:scale-105 transition-transform`}
+                      className={`${textColors[index % textColors.length]} ${getRandomSize()} 
+                        transform ${index % 2 === 0 ? "rotate-1" : "-rotate-1"} 
+                        hover:scale-105 transition-transform px-1 sm:px-2 md:px-3`}
                     >
                       {answer}
                     </div>
                   ))}
 
-                  {/* Last answer as a full-width item with special styling */}
+                  {/* Last answer with responsive styling */}
                   {answersList.length > 6 && (
-                    <div className="w-full text-center text-sm md:text-lg text-pink-600 font-medium px-2 rounded-md">
+                    <div className="w-full text-center text-base sm:text-lg md:text-xl text-pink-600 font-medium px-2 rounded-md">
                       {answersList[6]}
                     </div>
                   )}
@@ -223,7 +242,7 @@ export default function CardPage() {
 
               {/* Profile Image - moved to bottom right */}
               <div className="absolute sm:bottom-14 bottom-12 sm:right-1 right-0">
-                <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full bg-white p-1 shadow-lg border-2 border-pink-300">
+                <div className="relative right-6 w-24 h-24 md:w-28 md:h-28 rounded-full bg-white p-1 shadow-lg border-2 border-pink-300">
                   <div className="relative w-full h-full rounded-full overflow-hidden">
                     <Image
                       src={image || "/placeholder.svg?height=100&width=100"}
