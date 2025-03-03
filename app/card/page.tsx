@@ -51,7 +51,7 @@ export default function CardPage() {
       setIsDownloading(true)
       try {
         const canvas = await html2canvas(cardRef.current, {
-          scale: 2,
+          scale: 1,
           backgroundColor: null,
           logging: false,
           useCORS: true,
