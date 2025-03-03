@@ -1,23 +1,33 @@
 "use client"
 
 import type React from "react"
-
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
+import Cropper from "react-easy-crop"
+import { getCroppedImg } from "@/lib/cropImage" // Utility function to crop image
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Upload, Camera, ArrowLeft, ArrowRight } from "lucide-react"
 
+interface CropArea {
+  x: number
+  y: number
+  width: number
+  height: number
+}
+
 export default function UploadPage() {
   const router = useRouter()
   const [image, setImage] = useState<string | null>(null)
+  const [croppedImage, setCroppedImage] = useState<string | null>(null)
+  const [crop, setCrop] = useState({ x: 0, y: 0 })
+  const [zoom, setZoom] = useState(1)
   const [answers, setAnswers] = useState<Record<number, string>>({})
   const [isLoading, setIsLoading] = useState(false)
-
+  
   useEffect(() => {
-    // Load answers from localStorage
     const savedAnswers = localStorage.getItem("womensDay_answers")
     if (savedAnswers) {
       setAnswers(JSON.parse(savedAnswers))
@@ -41,13 +51,16 @@ export default function UploadPage() {
     }
   }
 
-  const handleSubmit = () => {
-    if (image) {
-      setIsLoading(true)
-      // Save image to localStorage
-      localStorage.setItem("womensDay_image", image)
+  const onCropComplete = useCallback(async (_: unknown, croppedAreaPixels: CropArea) => {
+    if (!image) return
+    const cropped = await getCroppedImg(image, croppedAreaPixels)
+    setCroppedImage(cropped)
+  }, [image])
 
-      // Simulate processing time
+  const handleSubmit = () => {
+    if (croppedImage) {
+      setIsLoading(true)
+      localStorage.setItem("womensDay_image", croppedImage)
       setTimeout(() => {
         setIsLoading(false)
         router.push("/card")
@@ -65,46 +78,41 @@ export default function UploadPage() {
 
         <Card className="border-2 border-pink-200 shadow-xl">
           <CardContent className="p-8">
-            <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">Upload Your Photo</h2>
+            <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">Upload & Crop Your Photo</h2>
+            <p className="text-center text-gray-600 mb-8">Crop your photo before finalizing your Women's Day card</p>
 
-            <p className="text-center text-gray-600 mb-8">
-              Add your photo to complete your personalized Women's Day celebration card
-            </p>
-
-            <div className="flex flex-col items-center justify-center">
+            <div className="relative w-64 h-64 mx-auto mb-6 rounded-full overflow-hidden border-4 border-pink-300">
               {image ? (
-                <div className="relative w-64 h-64 mb-6 rounded-full overflow-hidden border-4 border-pink-300">
-                  <Image src={image || "/placeholder.svg"} alt="Preview" fill className="object-cover" />
-                </div>
+                <Cropper
+                  image={image}
+                  crop={crop}
+                  zoom={zoom}
+                  aspect={1}
+                  onCropChange={setCrop}
+                  onZoomChange={setZoom}
+                  onCropComplete={onCropComplete}
+                />
               ) : (
-                <div className="w-64 h-64 mb-6 rounded-full bg-pink-100 flex items-center justify-center border-4 border-pink-300">
+                <div className="w-full h-full flex items-center justify-center bg-pink-100">
                   <Camera className="h-20 w-20 text-pink-300" />
                 </div>
               )}
-
-              <label htmlFor="photo-upload" className="cursor-pointer">
-                <div className="flex items-center justify-center px-6 py-3 bg-white border border-pink-300 rounded-full text-pink-600 hover:bg-pink-50 transition-colors duration-300">
-                  <Upload className="mr-2 h-5 w-5" />
-                  <span>{image ? "Change Photo" : "Upload Photo"}</span>
-                </div>
-                <input id="photo-upload" type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
-              </label>
             </div>
 
+            <label htmlFor="photo-upload" className="cursor-pointer">
+              <div className="flex items-center justify-center px-6 py-3 bg-white border border-pink-300 rounded-full text-pink-600 hover:bg-pink-50 transition-colors duration-300">
+                <Upload className="mr-2 h-5 w-5" />
+                <span>{image ? "Change Photo" : "Upload Photo"}</span>
+              </div>
+              <input id="photo-upload" type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
+            </label>
+
             <div className="flex justify-between mt-12">
-              <Button
-                variant="outline"
-                onClick={() => router.push("/questions")}
-                className="border-pink-300 text-pink-700 hover:bg-pink-50"
-              >
+              <Button variant="outline" onClick={() => router.push("/questions")} className="border-pink-300 text-pink-700 hover:bg-pink-50">
                 <ArrowLeft className="mr-2 h-4 w-4" /> Back
               </Button>
 
-              <Button
-                onClick={handleSubmit}
-                disabled={!image || isLoading}
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
-              >
+              <Button onClick={handleSubmit} disabled={!croppedImage || isLoading} className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white">
                 {isLoading ? "Creating Card..." : "Create Card"} <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
@@ -114,4 +122,3 @@ export default function UploadPage() {
     </div>
   )
 }
-

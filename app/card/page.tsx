@@ -229,7 +229,7 @@ export default function CardPage() {
                       src={image || "/placeholder.svg?height=100&width=100"}
                       alt="Your photo"
                       fill
-                      className="object-contain"
+                      className="object-fit"
                       sizes="(max-width: 768px) 96px, 112px"
                     />
                   </div>
