@@ -97,7 +97,7 @@ export default function UploadPage() {
                 onClick={() => router.push("/questions")}
                 className="border-pink-300 text-pink-700 hover:bg-pink-50"
               >
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Questions
+                <ArrowLeft className="mr-2 h-4 w-4" /> Back
               </Button>
 
               <Button
@@ -105,7 +105,7 @@ export default function UploadPage() {
                 disabled={!image || isLoading}
                 className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
               >
-                {isLoading ? "Creating Your Card..." : "Create My Card"} <ArrowRight className="ml-2 h-4 w-4" />
+                {isLoading ? "Creating Card..." : "Create Card"} <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
           </CardContent>
