@@ -51,7 +51,7 @@ export default function CardPage() {
       setIsDownloading(true)
       try {
         const canvas = await html2canvas(cardRef.current, {
-          scale: 3,
+          scale: 2,
           backgroundColor: null,
           logging: false,
           useCORS: true,
@@ -227,7 +227,7 @@ export default function CardPage() {
                       src={image || "/placeholder.svg?height=100&width=100"}
                       alt="Your photo"
                       fill
-                      className="object-cover"
+                      className="object-fit"
                       sizes="(max-width: 768px) 96px, 112px"
                     />
                   </div>
