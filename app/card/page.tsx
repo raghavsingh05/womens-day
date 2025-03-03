@@ -197,7 +197,7 @@ export default function CardPage() {
               </div> */}
 
               {/* White Card with Answers - more visually interesting */}
-              <div className="my-6 absolute top-1/4 left-4 right-4 p-4">
+              <div className="sm:my-6 my-2 absolute top-1/4 left-4 right-4 p-4">
                 <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-center">
                   {answersList.slice(0, 6).map((answer, index) => (
                     <div
