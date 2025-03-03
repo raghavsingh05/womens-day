@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Upload, Camera, ArrowLeft, ArrowRight } from "lucide-react"
+import { collection, addDoc, getFirestore } from "firebase/firestore"
+import { db } from "../../lib/firebaseConfig"
 
 interface CropArea {
   x: number
@@ -57,14 +59,48 @@ export default function UploadPage() {
     setCroppedImage(cropped)
   }, [image])
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (croppedImage) {
       setIsLoading(true)
-      localStorage.setItem("womensDay_image", croppedImage)
-      setTimeout(() => {
+      
+      try {
+        const doctorName = localStorage.getItem("doctorName")
+        const savedAnswers = localStorage.getItem("womensDay_answers")
+        
+        if (!doctorName || !savedAnswers) {
+          throw new Error("Missing required data")
+        }
+
+        const parsedAnswers = JSON.parse(savedAnswers)
+        
+        const surveyData = {
+          doctorName,
+          answers: {
+            "1": parsedAnswers["1"] || "",
+            "2": parsedAnswers["2"] || "",
+            "3": parsedAnswers["3"] || "",
+            "4": parsedAnswers["4"] || "",
+            "5": parsedAnswers["5"] || "",
+            "6": parsedAnswers["6"] || "",
+          },
+          timestamp: new Date().toISOString()
+        }
+
+        const surveysCollection = collection(db, "surveys")
+        await addDoc(surveysCollection, surveyData)
+
+        // Save image and proceed
+        localStorage.setItem("womensDay_image", croppedImage)
+        setTimeout(() => {
+          setIsLoading(false)
+          router.push("/card")
+        }, 1500)
+        
+      } catch (error) {
+        console.error("Error saving to Firebase:", error)
         setIsLoading(false)
         router.push("/card")
-      }, 1500)
+      }
     }
   }
 

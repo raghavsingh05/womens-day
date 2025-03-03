@@ -233,7 +233,7 @@ export default function CardPage() {
                   ))}
 
                   {/* Last answer with responsive styling */}
-                  {answersList.length > 5 && (
+                  {answersList.length > 4 && (
                     <div className="w-full text-center text-lg sm:text-lg md:text-xl text-pink-600 font-medium px-2 rounded-md">
                       {answersList[6]}
                     </div>
