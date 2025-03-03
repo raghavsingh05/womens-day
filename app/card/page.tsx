@@ -6,6 +6,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Download, Share2, Home } from "lucide-react"
 import html2canvas from "html2canvas"
+import 'html2canvas-objectfit-fix';
 
 export default function CardPage() {
   const router = useRouter()
@@ -48,7 +49,7 @@ export default function CardPage() {
 
   const handleDownload = async () => {
     if (cardRef.current) {
-      setIsDownloading(true)
+      setIsDownloading(true);
       try {
         const canvas = await html2canvas(cardRef.current, {
           scale: 2,
@@ -56,27 +57,28 @@ export default function CardPage() {
           logging: false,
           useCORS: true,
           allowTaint: true,
-        })
+          imageTimeout: 15000, // Ensures images load fully before capture
+        });
 
-        const dataUrl = canvas.toDataURL("image/png")
-        const link = document.createElement("a")
-        link.download = "WomensDayCard.png"
-        link.href = dataUrl
-        link.click()
+        const dataUrl = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.download = "WomensDayCard.png";
+        link.href = dataUrl;
+        link.click();
       } catch (error) {
-        console.error("Error generating image:", error)
+        console.error("Error generating image:", error);
       } finally {
-        setIsDownloading(false)
+        setIsDownloading(false);
       }
     }
-  }
+  };
 
   const handleShare = async () => {
     if (cardRef.current && navigator.share) {
       setIsDownloading(true)
       try {
         const canvas = await html2canvas(cardRef.current, {
-          scale: 3,
+          scale: 2,
           backgroundColor: null,
           useCORS: true,
           allowTaint: true,
@@ -86,8 +88,8 @@ export default function CardPage() {
           if (blob) {
             try {
               await navigator.share({
-                title: "My Women's Day Celebration Card",
-                text: "Check out my personalized Women's Day card!",
+                title: "Happy Women's Day! 🌸",
+                text: "Celebrating Women's Day!",
                 files: [new File([blob], "WomensDayCard.png", { type: "image/png" })],
               })
             } catch (error) {
