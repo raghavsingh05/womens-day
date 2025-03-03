@@ -222,7 +222,7 @@ export default function CardPage() {
 
 
               {/* Profile Image - moved to bottom right */}
-              <div className="absolute sm:bottom-14 bottom-12 sm:right-1 right-[-10%]">
+              <div className="absolute sm:bottom-14 bottom-12 sm:right-1 right-0">
                 <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full bg-white p-1 shadow-lg border-2 border-pink-300">
                   <div className="relative w-full h-full rounded-full overflow-hidden">
                     <Image
