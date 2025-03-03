@@ -13,8 +13,21 @@ export default function CardPage() {
   const [answers, setAnswers] = useState<Record<number, string>>({})
   const cardRef = useRef<HTMLDivElement>(null)
   const [isDownloading, setIsDownloading] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    // Check if we're on mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+
+    // Initial check
+    checkMobile()
+
+    // Add resize listener
+    window.addEventListener("resize", checkMobile)
+
+    // Load saved data
     const savedImage = localStorage.getItem("womensDay_image")
     const savedAnswers = localStorage.getItem("womensDay_answers")
 
@@ -24,6 +37,8 @@ export default function CardPage() {
     } else {
       router.push("/")
     }
+
+    return () => window.removeEventListener("resize", checkMobile)
   }, [router])
 
   const handleDownload = async () => {
@@ -84,8 +99,8 @@ export default function CardPage() {
     }
   }
 
-  // Positions for the cloud answers (more portrait-oriented)
-  const positions = [
+  // Desktop positions for the cloud answers
+  const desktopPositions = [
     { top: "18%", left: "25%", rotate: "-3deg", scale: 0.9 },
     { top: "18%", left: "75%", rotate: "2deg", scale: 0.85 },
     { top: "28%", left: "50%", rotate: "-2deg", scale: 0.9 },
@@ -98,8 +113,25 @@ export default function CardPage() {
     { top: "60%", left: "80%", rotate: "2deg", scale: 0.9 },
   ]
 
-  // Flower decorations
-  const flowers = [
+  // Mobile positions - more spread out and smaller scale
+  const mobilePositions = [
+    { top: "15%", left: "30%", rotate: "-3deg", scale: 0.6 },
+    { top: "15%", left: "70%", rotate: "2deg", scale: 0.6 },
+    { top: "25%", left: "50%", rotate: "-2deg", scale: 0.6 },
+    { top: "75%", left: "30%", rotate: "3deg", scale: 0.6 },
+    { top: "75%", left: "70%", rotate: "-3deg", scale: 0.6 },
+    { top: "85%", left: "50%", rotate: "2deg", scale: 0.6 },
+    { top: "35%", left: "25%", rotate: "-2deg", scale: 0.6 },
+    { top: "35%", left: "75%", rotate: "3deg", scale: 0.6 },
+    { top: "65%", left: "25%", rotate: "-2deg", scale: 0.6 },
+    { top: "65%", left: "75%", rotate: "2deg", scale: 0.6 },
+  ]
+
+  // Use appropriate positions based on screen size
+  const positions = isMobile ? mobilePositions : desktopPositions
+
+  // Flower decorations - reduced for mobile
+  const desktopFlowers = [
     { top: "5%", left: "5%", emoji: "🌸", rotate: "0deg", scale: 1.2 },
     { top: "5%", left: "95%", emoji: "🌷", rotate: "15deg", scale: 1.3 },
     { top: "95%", left: "5%", emoji: "🌹", rotate: "-10deg", scale: 1.2 },
@@ -112,15 +144,26 @@ export default function CardPage() {
     { top: "90%", left: "70%", emoji: "🌹", rotate: "5deg", scale: 0.9 },
   ]
 
+  const mobileFlowers = [
+    { top: "5%", left: "5%", emoji: "🌸", rotate: "0deg", scale: 0.8 },
+    { top: "5%", left: "95%", emoji: "🌷", rotate: "15deg", scale: 0.8 },
+    { top: "95%", left: "5%", emoji: "🌹", rotate: "-10deg", scale: 0.8 },
+    { top: "95%", left: "95%", emoji: "🌺", rotate: "10deg", scale: 0.8 },
+    { top: "50%", left: "3%", emoji: "💐", rotate: "5deg", scale: 0.8 },
+    { top: "50%", left: "97%", emoji: "🌻", rotate: "-5deg", scale: 0.8 },
+  ]
+
+  const flowers = isMobile ? mobileFlowers : desktopFlowers
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-100 to-purple-200 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-pink-100 to-purple-200 py-6 px-3 md:py-8 md:px-4">
       <div className="container max-w-md mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+        <h1 className="text-2xl md:text-4xl font-bold text-center mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
           Your Women's Day Card
         </h1>
 
-        <div className="flex justify-center mb-8">
-          <div className="relative w-full">
+        <div className="flex justify-center mb-6 md:mb-8">
+          <div className="relative w-full max-w-[320px] md:max-w-md mx-auto">
             {/* Card Container - portrait oriented */}
             <div
               ref={cardRef}
@@ -131,15 +174,20 @@ export default function CardPage() {
 
               {/* Decorative pattern overlay */}
               <div className="absolute inset-0 z-0">
-              <Image src="/assets/images/background.jpg" alt="Card background" fill className="object-cover" priority />
-            </div>
-              
+                <Image
+                  src="/assets/images/background.jpg"
+                  alt="Card background"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
 
               {/* Decorative border */}
-              <div className="absolute inset-0 border-[12px] border-white rounded-3xl pointer-events-none" />
+              <div className="absolute inset-0 border-[8px] md:border-[12px] border-white rounded-3xl pointer-events-none" />
 
               {/* Inner decorative border */}
-              <div className="absolute inset-[12px] border-[2px] border-pink-300 rounded-2xl pointer-events-none" />
+              <div className="absolute inset-[8px] md:inset-[12px] border-[1px] md:border-[2px] border-pink-300 rounded-2xl pointer-events-none" />
 
               {/* Flower decorations */}
               {flowers.map((flower, index) => (
@@ -159,9 +207,9 @@ export default function CardPage() {
               ))}
 
               {/* Title Banner */}
-              <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-10 w-11/12">
-                <div className="bg-white/90 backdrop-blur-sm py-3 px-4 rounded-full shadow-lg border-2 border-pink-200">
-                  <h2 className="text-center text-xl font-bold text-pink-600">Happy Women's Day</h2>
+              <div className="absolute top-4 md:top-6 left-1/2 transform -translate-x-1/2 z-10 w-11/12">
+                <div className="bg-white/90 backdrop-blur-sm py-2 md:py-3 px-3 md:px-4 rounded-full shadow-lg border-2 border-pink-200">
+                  <h2 className="text-center text-base md:text-xl font-bold text-pink-600">Happy Women's Day</h2>
                 </div>
               </div>
 
@@ -191,7 +239,9 @@ export default function CardPage() {
 
                       {/* Text content */}
                       <div className="absolute inset-0 flex items-center justify-center p-4">
-                        <p className="text-pink-800 text-xs font-medium text-center drop-shadow-sm">{answer}</p>
+                        <p className="text-pink-800 text-xs font-medium text-center drop-shadow-sm">
+                          {isMobile && answer.length > 30 ? `${answer.substring(0, 30)}...` : answer}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -202,9 +252,9 @@ export default function CardPage() {
               {image && (
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
                   {/* Decorative outer ring */}
-                  <div className="relative w-48 h-48 rounded-full bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 p-2 shadow-[0_0_30px_rgba(219,39,119,0.6)]">
+                  <div className="relative w-32 h-32 md:w-48 md:h-48 rounded-full bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 p-2 shadow-[0_0_30px_rgba(219,39,119,0.6)]">
                     {/* Decorative middle ring */}
-                    <div className="absolute inset-0 rounded-full border-[6px] border-white/70 m-1" />
+                    <div className="absolute inset-0 rounded-full border-[4px] md:border-[6px] border-white/70 m-1" />
 
                     {/* Inner white border */}
                     <div className="absolute inset-2 rounded-full bg-white p-1">
@@ -215,16 +265,17 @@ export default function CardPage() {
                           alt="Your photo"
                           fill
                           className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 192px"
+                          sizes="(max-width: 768px) 128px, 192px"
                         />
                       </div>
                     </div>
 
-                    {/* Decorative hearts around the image */}
-                    {[...Array(8)].map((_, i) => {
-                      const angle = i * 45 * (Math.PI / 180)
-                      const x = Math.cos(angle) * 80
-                      const y = Math.sin(angle) * 80
+                    {/* Decorative hearts around the image - fewer on mobile */}
+                    {[...Array(isMobile ? 4 : 8)].map((_, i) => {
+                      const angle = i * (isMobile ? 90 : 45) * (Math.PI / 180)
+                      const radius = isMobile ? 50 : 80
+                      const x = Math.cos(angle) * radius
+                      const y = Math.sin(angle) * radius
                       return (
                         <div
                           key={`heart-${i}`}
@@ -237,7 +288,7 @@ export default function CardPage() {
                         >
                           <Heart
                             fill={i % 2 === 0 ? "#ec4899" : "#c026d3"}
-                            className="w-5 h-5 text-pink-500 drop-shadow-md"
+                            className="w-4 h-4 md:w-5 md:h-5 text-pink-500 drop-shadow-md"
                           />
                         </div>
                       )
@@ -247,9 +298,9 @@ export default function CardPage() {
               )}
 
               {/* Bottom Quote */}
-              <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-10 w-11/12">
-                <div className="bg-white/90 backdrop-blur-sm py-3 px-4 rounded-full shadow-lg border-2 border-pink-200">
-                  <p className="text-center text-sm font-bold text-purple-700">
+              <div className="absolute bottom-4 md:bottom-6 left-1/2 transform -translate-x-1/2 z-10 w-11/12">
+                <div className="bg-white/90 backdrop-blur-sm py-2 md:py-3 px-3 md:px-4 rounded-full shadow-lg border-2 border-pink-200">
+                  <p className="text-center text-xs md:text-sm font-bold text-purple-700">
                     Celebrating You—Strong, Balanced & Unbreakable!
                   </p>
                 </div>
@@ -258,34 +309,36 @@ export default function CardPage() {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 mb-6 md:mb-8">
           <Button
             onClick={handleDownload}
             disabled={isDownloading}
-            className="bg-gradient-to-r from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white shadow-md transition-all hover:shadow-lg"
-            size="lg"
+            className="bg-gradient-to-r from-purple-500 to-purple-700 hover:from-purple-600 hover:to-purple-800 text-white shadow-md transition-all hover:shadow-lg text-sm md:text-base"
+            size="default"
+            variant="default"
           >
-            <Download className="mr-2 h-5 w-5" />
+            <Download className="mr-2 h-4 w-4 md:h-5 md:w-5" />
             {isDownloading ? "Processing..." : "Download Card"}
           </Button>
 
           <Button
             onClick={handleShare}
             disabled={isDownloading}
-            className="bg-gradient-to-r from-pink-400 to-pink-600 hover:from-pink-500 hover:to-pink-700 text-white shadow-md transition-all hover:shadow-lg"
-            size="lg"
+            className="bg-gradient-to-r from-pink-400 to-pink-600 hover:from-pink-500 hover:to-pink-700 text-white shadow-md transition-all hover:shadow-lg text-sm md:text-base"
+            size="default"
+            variant="default"
           >
-            <Share2 className="mr-2 h-5 w-5" />
+            <Share2 className="mr-2 h-4 w-4 md:h-5 md:w-5" />
             {isDownloading ? "Processing..." : "Share Card"}
           </Button>
 
           <Button
             variant="outline"
             onClick={() => router.push("/")}
-            className="border-purple-300 text-purple-700 hover:bg-purple-50 shadow-sm transition-all hover:shadow-md"
-            size="lg"
+            className="border-purple-300 text-purple-700 hover:bg-purple-50 shadow-sm transition-all hover:shadow-md text-sm md:text-base"
+            size="default"
           >
-            <Home className="mr-2 h-5 w-5" /> Start Over
+            <Home className="mr-2 h-4 w-4 md:h-5 md:w-5" /> Start Over
           </Button>
         </div>
 
