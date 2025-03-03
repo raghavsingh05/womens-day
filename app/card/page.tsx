@@ -130,13 +130,10 @@ export default function CardPage() {
               <div className="absolute inset-0 bg-gradient-to-b from-pink-200 via-purple-100 to-pink-200" />
 
               {/* Decorative pattern overlay */}
-              <div
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage:
-                    'url(\'data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%239C92AC" fillOpacity="1" fillRule="evenodd"%3E%3Ccircle cx="3" cy="3" r="3"%3E%3C/circle%3E%3Ccircle cx="13" cy="13" r="3"%3E%3C/circle%3E%3C/g%3E%3C/svg%3E\')',
-                }}
-              />
+              <div className="absolute inset-0 z-0">
+              <Image src="/assets/images/background.jpg" alt="Card background" fill className="object-cover" priority />
+            </div>
+              
 
               {/* Decorative border */}
               <div className="absolute inset-0 border-[12px] border-white rounded-3xl pointer-events-none" />
