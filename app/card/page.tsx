@@ -240,7 +240,7 @@ export default function CardPage() {
 
                 {/* Last answer (key 6) with biggest text size - in new line */}
                 {answers["6"] && (
-                  <div className="w-full text-center text-xl sm:text-2xl md:text-3xl text-pink-600 font-bold px-2 rounded-md mt-1">
+                  <div className="w-full text-center text-xl sm:text-2xl md:text-3xl text-pink-600 font-semibold px-2 rounded-md mt-1">
                     {answers["6"]}
                   </div>
                 )}
