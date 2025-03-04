@@ -221,24 +221,29 @@ export default function CardPage() {
               {/* White Card with Answers - more visually interesting */}
               <div className="sm:my-6 my-2 absolute top-1/4 left-4 right-4 p-4">
                 <div className="flex flex-wrap justify-center sm:gap-x-2 md:gap-x-3 gap-y-1 sm:gap-y-2 md:gap-y-3 text-center">
-                  {answersList.slice(0, 6).map((answer, index) => (
-                    <div
-                      key={index}
-                      className={`${textColors[index % textColors.length]} ${getRandomSize()} 
-                        transform ${index % 2 === 0 ? "rotate-1" : "-rotate-1"} 
-                        hover:scale-105 transition-transform px-0.5 sm:px-1 md:px-2`}
-                    >
-                      {answer}
-                    </div>
-                  ))}
-
-                  {/* Last answer with responsive styling */}
-                  {answersList.length > 4 && (
-                    <div className="w-full text-center text-lg sm:text-lg md:text-xl text-pink-600 font-medium px-2 rounded-md">
-                      {answersList[6]}
-                    </div>
-                  )}
+                  {/* First 5 answers */}
+                  {Object.entries(answers).map(([key, answer]) => {
+                    const index = parseInt(key) - 1
+                    if (key !== "6") {  // Show all answers except the last one
+                      return (
+                        <div
+                          key={key}
+                          className={`${textColors[index % textColors.length]} ${getRandomSize()} 
+                            hover:scale-105 transition-transform px-0.5 sm:px-1 md:px-2`}
+                        >
+                          {answer}
+                        </div>
+                      )
+                    }
+                  })}
                 </div>
+
+                {/* Last answer (key 6) with biggest text size - in new line */}
+                {answers["6"] && (
+                  <div className="w-full text-center text-xl sm:text-2xl md:text-3xl text-pink-600 font-bold px-2 rounded-md mt-1">
+                    {answers["6"]}
+                  </div>
+                )}
               </div>
 
 
