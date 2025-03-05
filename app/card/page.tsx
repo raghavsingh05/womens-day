@@ -140,12 +140,12 @@ export default function CardPage() {
 
   // Font families for different answers
   const fontFamilies = [
-    'Inter',
-    'Inter',
-    'Inter',
-    'Inter',
-    'Inter',
-    'Inter',
+    'Poppins',
+    'Poppins',
+    'Poppins',
+    'Poppins',
+    'Poppins',
+    'Poppins',
   ]
 
   // Add this function to generate random size class
@@ -238,7 +238,7 @@ export default function CardPage() {
                       top: '10%',
                       left: '25%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Inter',
+                      fontFamily: 'Poppins',
                       fontSize: '18px',
                       letterSpacing: '0.03em',
                       textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
@@ -252,7 +252,7 @@ export default function CardPage() {
                       top: '32%',
                       left: '75%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Inter',
+                      fontFamily: 'Poppins',
                       fontSize: '20px',
                       letterSpacing: '0.03em',
                       textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
@@ -266,7 +266,7 @@ export default function CardPage() {
                       top: '50%',
                       left: '30%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Inter',
+                      fontFamily: 'Poppins',
                       fontSize: '19px',
                       letterSpacing: '0.03em',
                       textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
@@ -280,7 +280,7 @@ export default function CardPage() {
                       top: '75%',
                       left: '80%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Inter',
+                      fontFamily: 'Poppins',
                       fontSize: '18px',
                       letterSpacing: '0.03em',
                       textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
@@ -305,7 +305,7 @@ export default function CardPage() {
                           leftPosition = 25;
                           break;
                         case 2:
-                          topPosition = 60;
+                          topPosition = 63;
                           leftPosition = 55;
                           break;
                         case 3:
