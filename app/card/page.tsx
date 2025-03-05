@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Download, Share2, Home } from "lucide-react"
+import { Download, Share2, Home, Bold } from "lucide-react"
 import html2canvas from "html2canvas"
 import 'html2canvas-objectfit-fix';
 
@@ -140,12 +140,12 @@ export default function CardPage() {
 
   // Font families for different answers
   const fontFamilies = [
-    'Poppins',
-    'Poppins',
-    'Poppins',
-    'Poppins',
-    'Poppins',
-    'Poppins',
+    'Inter',
+    'Inter',
+    'Inter',
+    'Inter',
+    'Inter',
+    'Inter',
   ]
 
   // Add this function to generate random size class
@@ -230,66 +230,7 @@ export default function CardPage() {
 
               {/* White Card with Answers - organized layout */}
               <div className="absolute inset-0 flex items-start justify-center">
-                <div className="mt-[10.5rem] sm:mt-48 relative w-[79%] h-[25%]">
-                  {/* Pre-fixed words */}
-                  <div 
-                    className="absolute transform text-pink-500 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
-                    style={{
-                      top: '10%',
-                      left: '25%',
-                      transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Poppins',
-                      fontSize: '18px',
-                      letterSpacing: '0.03em',
-                      textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
-                    }}
-                  >
-                    Girl Power
-                  </div>
-                  <div 
-                    className="absolute transform text-red-600 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
-                    style={{
-                      top: '32%',
-                      left: '75%',
-                      transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Poppins',
-                      fontSize: '20px',
-                      letterSpacing: '0.03em',
-                      textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
-                    }}
-                  >
-                    Graceful
-                  </div>
-                  <div 
-                    className="absolute transform text-pink-800 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
-                    style={{
-                      top: '50%',
-                      left: '30%',
-                      transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Poppins',
-                      fontSize: '19px',
-                      letterSpacing: '0.03em',
-                      textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
-                    }}
-                  >
-                    Unstoppable
-                  </div>
-                  <div 
-                    className="absolute transform text-red-700 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
-                    style={{
-                      top: '75%',
-                      left: '80%',
-                      transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Poppins',
-                      fontSize: '18px',
-                      letterSpacing: '0.03em',
-                      textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
-                    }}
-                  >
-                    Fearless
-                  </div>
-
-                  {/* Original answers */}
+                <div className="mt-44 sm:mt-[13rem] relative w-[79%] h-[25%]">
                   {Object.entries(answers).map(([key, answer]) => {
                     const index = parseInt(key) - 1
                     if (key !== "6") {
@@ -298,23 +239,23 @@ export default function CardPage() {
                       switch(index) {
                         case 0:
                           topPosition = 10;
-                          leftPosition = 75;
+                          leftPosition = 20;
                           break;
                         case 1:
-                          topPosition = 32;
-                          leftPosition = 25;
+                          topPosition = 20;
+                          leftPosition = 65;
                           break;
                         case 2:
-                          topPosition = 63;
+                          topPosition = 62;
                           leftPosition = 55;
                           break;
                         case 3:
-                          topPosition = 75;
-                          leftPosition = 25;
+                          topPosition = 50;
+                          leftPosition = 80;
                           break;
                         default:
                           topPosition = 50;
-                          leftPosition = 80;
+                          leftPosition = 11;
                       }
                       
                       return (
@@ -330,11 +271,12 @@ export default function CardPage() {
                             left: `${leftPosition}%`,
                             transform: `translate(-50%, -50%) rotate(0deg)`,
                             fontFamily: fontFamilies[index % fontFamilies.length],
-                            fontSize: `${18 + (index % 3)}px`,
+                            fontSize: `${14 + (index % 3)}px`,
                             letterSpacing: '0.03em',
                             textShadow: '1px 1px 1px rgba(0,0,0,0.05)',
                             filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.05))',
-                            lineHeight: '1.6'
+                            lineHeight: '1.6',
+                            fontWeight:600
                           }}
                         >
                           {answer}
@@ -346,7 +288,7 @@ export default function CardPage() {
                   {/* Last answer (key 6) with special styling */}
                   {answers["6"] && (
                     <div 
-                      className="absolute top-[87%] left-1/2 transform -translate-x-1/2 -translate-y-1/2
+                      className="absolute top-[88%] left-1/2 w-full transform -translate-x-1/2 -translate-y-1/2
                         text-lg sm:text-xl md:text-2xl text-pink-600 font-bold text-center
                         max-w-[100%] z-20 tracking-wide"
                       style={{
