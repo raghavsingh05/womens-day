@@ -249,7 +249,7 @@ export default function CardPage() {
                   <div 
                     className="absolute transform text-red-600 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
                     style={{
-                      top: '35%',
+                      top: '32%',
                       left: '75%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
                       fontFamily: 'Great Vibes',
@@ -263,7 +263,7 @@ export default function CardPage() {
                   <div 
                     className="absolute transform text-pink-800 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
                     style={{
-                      top: '60%',
+                      top: '55%',
                       left: '30%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
                       fontFamily: 'Caveat',
@@ -277,7 +277,7 @@ export default function CardPage() {
                   <div 
                     className="absolute transform text-red-700 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
                     style={{
-                      top: '80%',
+                      top: '75%',
                       left: '80%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
                       fontFamily: 'Kalam',
@@ -297,20 +297,20 @@ export default function CardPage() {
                       
                       switch(index) {
                         case 0:
-                          topPosition = 15;
+                          topPosition = 10;
                           leftPosition = 75;
                           break;
                         case 1:
-                          topPosition = 40;
+                          topPosition = 32;
                           leftPosition = 25;
                           break;
                         case 2:
-                          topPosition = 65;
+                          topPosition = 45;
                           leftPosition = 55;
                           break;
                         case 3:
                           topPosition = 75;
-                          leftPosition = 10;
+                          leftPosition = 25;
                           break;
                         default:
                           topPosition = 55;
@@ -346,7 +346,7 @@ export default function CardPage() {
                   {/* Last answer (key 6) with special styling */}
                   {answers["6"] && (
                     <div 
-                      className="absolute top-[90%] left-1/2 transform -translate-x-1/2 -translate-y-1/2
+                      className="absolute top-[87%] left-1/2 transform -translate-x-1/2 -translate-y-1/2
                         text-lg sm:text-xl md:text-2xl text-pink-600 font-bold text-center
                         max-w-[75%] z-20 tracking-wide"
                       style={{
