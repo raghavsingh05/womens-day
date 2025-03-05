@@ -277,8 +277,8 @@ export default function CardPage() {
                   <div 
                     className="absolute transform text-red-700 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
                     style={{
-                      top: '85%',
-                      left: '70%',
+                      top: '80%',
+                      left: '80%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
                       fontFamily: 'Kalam',
                       fontSize: '18px',
@@ -310,11 +310,11 @@ export default function CardPage() {
                           break;
                         case 3:
                           topPosition = 75;
-                          leftPosition = 35;
+                          leftPosition = 10;
                           break;
                         default:
-                          topPosition = 85;
-                          leftPosition = 45;
+                          topPosition = 55;
+                          leftPosition = 80;
                       }
                       
                       return (
@@ -346,13 +346,14 @@ export default function CardPage() {
                   {/* Last answer (key 6) with special styling */}
                   {answers["6"] && (
                     <div 
-                      className="absolute top-[95%] left-1/2 transform -translate-x-1/2 -translate-y-1/2
-                        text-xl sm:text-2xl md:text-3xl text-pink-600 font-bold text-center
-                        max-w-[85%] z-20 tracking-wide"
+                      className="absolute top-[90%] left-1/2 transform -translate-x-1/2 -translate-y-1/2
+                        text-lg sm:text-xl md:text-2xl text-pink-600 font-bold text-center
+                        max-w-[75%] z-20 tracking-wide"
                       style={{
                         fontFamily: 'Great Vibes',
                         letterSpacing: '0.03em',
-                        textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
+                        textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+                        lineHeight: '1.4'
                       }}
                     >
                       {answers["6"]}
