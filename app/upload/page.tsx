@@ -65,16 +65,22 @@ export default function UploadPage() {
       
       try {
         const doctorName = localStorage.getItem("doctorName")
+        const doctorMobile = localStorage.getItem("doctorMobile")
+        const doctorCity = localStorage.getItem("doctorCity")
         const savedAnswers = localStorage.getItem("womensDay_answers")
         
-        if (!doctorName || !savedAnswers) {
+        if (!doctorName || !savedAnswers || !doctorMobile || !doctorCity) {
           throw new Error("Missing required data")
         }
 
         const parsedAnswers = JSON.parse(savedAnswers)
         
         const surveyData = {
-          doctorName,
+          userInfo: {
+            name: doctorName,
+            mobile: doctorMobile,
+            city: doctorCity
+          },
           answers: {
             "1": parsedAnswers["1"] || "",
             "2": parsedAnswers["2"] || "",

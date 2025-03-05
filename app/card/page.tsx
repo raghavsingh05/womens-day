@@ -138,6 +138,16 @@ export default function CardPage() {
     "text-pink-500",
   ]
 
+  // Font families for different answers
+  const fontFamilies = [
+    'Dancing Script',
+    'Pacifico',
+    'Caveat',
+    'Satisfy',
+    'Great Vibes',
+    'Kalam',
+  ]
+
   // Add this function to generate random size class
   const getRandomSize = () => {
     const sizes = ['xs', 'sm', 'md', 'lg'] as const
@@ -218,38 +228,171 @@ export default function CardPage() {
                 </div>
               </div> */}
 
-              {/* White Card with Answers - more visually interesting */}
-              <div className="sm:my-6 my-2 absolute top-1/4 left-4 right-4 p-4">
-                <div className="flex flex-wrap justify-center sm:gap-x-2 md:gap-x-3 gap-y-1 sm:gap-y-2 md:gap-y-3 text-center">
-                  {/* First 5 answers */}
+              {/* White Card with Answers - organized layout */}
+              <div className="absolute inset-0 flex items-start justify-center">
+                <div className="mt-[8.5rem] sm:mt-48 relative w-[79%] h-[25%]">
+                  {/* Pre-fixed words */}
+                  <div 
+                    className="absolute transform text-pink-500 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
+                    style={{
+                      top: '20%',
+                      left: '15%',
+                      transform: 'translate(-50%, -50%) rotate(0deg)',
+                      fontFamily: 'Pacifico',
+                      fontSize: '16px',
+                      letterSpacing: '0.03em',
+                      textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
+                    }}
+                  >
+                    Girl Power
+                  </div>
+                  <div 
+                    className="absolute transform text-pink-700 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
+                    style={{
+                      top: '25%',
+                      left: '85%',
+                      transform: 'translate(-50%, -50%) rotate(0deg)',
+                      fontFamily: 'Dancing Script',
+                      fontSize: '18px',
+                      letterSpacing: '0.03em',
+                      textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
+                    }}
+                  >
+                    Female
+                  </div>
+                  <div 
+                    className="absolute transform text-red-600 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
+                    style={{
+                      top: '45%',
+                      left: '20%',
+                      transform: 'translate(-50%, -50%) rotate(0deg)',
+                      fontFamily: 'Great Vibes',
+                      fontSize: '20px',
+                      letterSpacing: '0.03em',
+                      textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
+                    }}
+                  >
+                    Graceful
+                  </div>
+                  <div 
+                    className="absolute transform text-pink-600 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
+                    style={{
+                      top: '50%',
+                      left: '80%',
+                      transform: 'translate(-50%, -50%) rotate(0deg)',
+                      fontFamily: 'Satisfy',
+                      fontSize: '17px',
+                      letterSpacing: '0.03em',
+                      textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
+                    }}
+                  >
+                    Self-love
+                  </div>
+                  <div 
+                    className="absolute transform text-pink-800 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
+                    style={{
+                      top: '65%',
+                      left: '25%',
+                      transform: 'translate(-50%, -50%) rotate(0deg)',
+                      fontFamily: 'Caveat',
+                      fontSize: '19px',
+                      letterSpacing: '0.03em',
+                      textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
+                    }}
+                  >
+                    Unstoppable
+                  </div>
+                  <div 
+                    className="absolute transform text-red-700 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
+                    style={{
+                      top: '70%',
+                      left: '75%',
+                      transform: 'translate(-50%, -50%) rotate(0deg)',
+                      fontFamily: 'Kalam',
+                      fontSize: '18px',
+                      letterSpacing: '0.03em',
+                      textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
+                    }}
+                  >
+                    Fearless
+                  </div>
+
+                  {/* Original answers */}
                   {Object.entries(answers).map(([key, answer]) => {
                     const index = parseInt(key) - 1
-                    if (key !== "6") {  // Show all answers except the last one
+                    if (key !== "6") {
+                      let topPosition, leftPosition;
+                      
+                      switch(index) {
+                        case 0:
+                          topPosition = 15;
+                          leftPosition = 50;
+                          break;
+                        case 1:
+                          topPosition = 35;
+                          leftPosition = 45;
+                          break;
+                        case 2:
+                          topPosition = 30;
+                          leftPosition = 55;
+                          break;
+                        case 3:
+                          topPosition = 55;
+                          leftPosition = 50;
+                          break;
+                        default:
+                          topPosition = 75;
+                          leftPosition = 45;
+                      }
+                      
                       return (
                         <div
                           key={key}
-                          className={`${textColors[index % textColors.length]} ${getRandomSize()} 
-                            hover:scale-105 transition-transform px-0.5 sm:px-1 md:px-2`}
+                          className={`absolute transform transition-all duration-500 ease-in-out
+                            ${textColors[index % textColors.length]} 
+                            hover:scale-105 cursor-default
+                            text-center max-w-[45%] tracking-wide
+                            hover:z-10`}
+                          style={{
+                            top: `${topPosition}%`,
+                            left: `${leftPosition}%`,
+                            transform: `translate(-50%, -50%) rotate(0deg)`,
+                            fontFamily: fontFamilies[index % fontFamilies.length],
+                            fontSize: `${18 + (index % 3)}px`,
+                            letterSpacing: '0.03em',
+                            textShadow: '1px 1px 1px rgba(0,0,0,0.05)',
+                            filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.05))',
+                            lineHeight: '1.6'
+                          }}
                         >
                           {answer}
                         </div>
                       )
                     }
                   })}
-                </div>
 
-                {/* Last answer (key 6) with biggest text size - in new line */}
-                {answers["6"] && (
-                  <div className="w-full text-center text-xl sm:text-2xl md:text-3xl text-pink-600 font-semibold px-2 rounded-md mt-1">
-                    {answers["6"]}
-                  </div>
-                )}
+                  {/* Last answer (key 6) with special styling */}
+                  {answers["6"] && (
+                    <div 
+                      className="absolute top-[95%] left-1/2 transform -translate-x-1/2 -translate-y-1/2
+                        text-xl sm:text-2xl md:text-3xl text-pink-600 font-bold text-center
+                        max-w-[85%] z-20 tracking-wide"
+                      style={{
+                        fontFamily: 'Great Vibes',
+                        letterSpacing: '0.03em',
+                        textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
+                      }}
+                    >
+                      {answers["6"]}
+                    </div>
+                  )}
+                </div>
               </div>
 
 
               {/* Profile Image - moved to bottom right */}
               <div className="absolute sm:bottom-14 bottom-12 sm:right-1 right-0">
-                <div className="relative right-6 w-24 h-24 md:w-28 md:h-28 rounded-full bg-white p-1 shadow-lg border-2 border-pink-300">
+                <div className="relative right-6 w-28 h-28 md:h-32 md:w-32 rounded-full bg-white p-1 shadow-lg border-2 border-pink-300">
                   <div className="relative w-full h-full rounded-full overflow-hidden">
                     <Image
                       src={image || "/placeholder.svg?height=100&width=100"}
@@ -316,6 +459,11 @@ export default function CardPage() {
             Creating your beautiful card... Please wait a moment.
           </div>
         )}
+
+        {/* Add this in the head section of your document */}
+        <style jsx global>{`
+          @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Pacifico&family=Caveat:wght@400;700&family=Satisfy&family=Great+Vibes&family=Kalam:wght@400;700&display=swap');
+        `}</style>
       </div>
     </div>
   )

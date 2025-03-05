@@ -55,13 +55,20 @@ const FloatingElement = ({
 
 export default function Home() {
   const router = useRouter()
-  const [name, setName] = useState("")
+  const [formData, setFormData] = useState({
+    name: "",
+    mobile: "",
+    city: ""
+  })
   const [showWelcome, setShowWelcome] = useState(true)
 
   const handleNameSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (name.trim()) {
-      localStorage.setItem("doctorName", name.trim())
+    if (formData.name.trim() && formData.mobile.trim() && formData.city.trim()) {
+      // Store all data in localStorage
+      localStorage.setItem("doctorName", formData.name.trim())
+      localStorage.setItem("doctorMobile", formData.mobile.trim())
+      localStorage.setItem("doctorCity", formData.city.trim())
       setShowWelcome(false)
     }
   }
@@ -136,24 +143,56 @@ export default function Home() {
                       <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
                         Welcome to Women's Day Celebration
                       </h1>
-                      <p className="text-gray-600">Please enter your name to begin your journey</p>
+                      <p className="text-gray-600">Please enter your details to begin your journey</p>
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-700">Dr.</label>
-                      <Input
-                        type="text"
-                        placeholder="Enter your name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="border-pink-200 focus:border-pink-400 focus:ring-pink-400"
-                      />
+                    <div className="space-y-4">
+                      {/* Name Input */}
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-700">Dr.</label>
+                        <Input
+                          type="text"
+                          placeholder="Enter your name"
+                          value={formData.name}
+                          onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                          className="border-pink-200 focus:border-pink-400 focus:ring-pink-400"
+                          required
+                        />
+                      </div>
+
+                      {/* Mobile Input */}
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-700">Mobile Number</label>
+                        <Input
+                          type="tel"
+                          placeholder="Enter your mobile number"
+                          value={formData.mobile}
+                          onChange={(e) => setFormData(prev => ({ ...prev, mobile: e.target.value }))}
+                          className="border-pink-200 focus:border-pink-400 focus:ring-pink-400"
+                          pattern="[0-9]{10}"
+                          maxLength={10}
+                          required
+                        />
+                      </div>
+
+                      {/* City Input */}
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-700">City</label>
+                        <Input
+                          type="text"
+                          placeholder="Enter your city"
+                          value={formData.city}
+                          onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))}
+                          className="border-pink-200 focus:border-pink-400 focus:ring-pink-400"
+                          required
+                        />
+                      </div>
                     </div>
 
                     <Button
                       type="submit"
                       className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
-                      disabled={!name.trim()}
+                      disabled={!formData.name.trim() || !formData.mobile.trim() || !formData.city.trim()}
                     >
                       Continue
                     </Button>
@@ -192,7 +231,7 @@ export default function Home() {
                   >
                     <div className="space-y-4">
                       <p className="text-xl text-gray-800 font-medium">
-                        Dear Dr. {name}, When a woman is in balance, she's unbreakable. 💪
+                        Dear Dr. {formData.name}, When a woman is in balance, she's unbreakable. 💪
                       </p>
 
                       <p className="text-gray-700 leading-relaxed">
