@@ -235,11 +235,11 @@ export default function CardPage() {
                   <div 
                     className="absolute transform text-pink-500 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
                     style={{
-                      top: '20%',
-                      left: '15%',
+                      top: '10%',
+                      left: '25%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
                       fontFamily: 'Pacifico',
-                      fontSize: '16px',
+                      fontSize: '18px',
                       letterSpacing: '0.03em',
                       textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
                     }}
@@ -247,24 +247,10 @@ export default function CardPage() {
                     Girl Power
                   </div>
                   <div 
-                    className="absolute transform text-pink-700 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
-                    style={{
-                      top: '25%',
-                      left: '85%',
-                      transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Dancing Script',
-                      fontSize: '18px',
-                      letterSpacing: '0.03em',
-                      textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
-                    }}
-                  >
-                    Female
-                  </div>
-                  <div 
                     className="absolute transform text-red-600 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
                     style={{
-                      top: '45%',
-                      left: '20%',
+                      top: '35%',
+                      left: '75%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
                       fontFamily: 'Great Vibes',
                       fontSize: '20px',
@@ -275,24 +261,10 @@ export default function CardPage() {
                     Graceful
                   </div>
                   <div 
-                    className="absolute transform text-pink-600 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
-                    style={{
-                      top: '50%',
-                      left: '80%',
-                      transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Satisfy',
-                      fontSize: '17px',
-                      letterSpacing: '0.03em',
-                      textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
-                    }}
-                  >
-                    Self-love
-                  </div>
-                  <div 
                     className="absolute transform text-pink-800 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
                     style={{
-                      top: '65%',
-                      left: '25%',
+                      top: '60%',
+                      left: '30%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
                       fontFamily: 'Caveat',
                       fontSize: '19px',
@@ -305,8 +277,8 @@ export default function CardPage() {
                   <div 
                     className="absolute transform text-red-700 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
                     style={{
-                      top: '70%',
-                      left: '75%',
+                      top: '85%',
+                      left: '70%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
                       fontFamily: 'Kalam',
                       fontSize: '18px',
@@ -325,23 +297,23 @@ export default function CardPage() {
                       
                       switch(index) {
                         case 0:
-                          topPosition = 15;
+                          topPosition = 25;
                           leftPosition = 50;
                           break;
                         case 1:
-                          topPosition = 35;
-                          leftPosition = 45;
+                          topPosition = 45;
+                          leftPosition = 25;
                           break;
                         case 2:
-                          topPosition = 30;
+                          topPosition = 65;
                           leftPosition = 55;
                           break;
                         case 3:
-                          topPosition = 55;
-                          leftPosition = 50;
+                          topPosition = 75;
+                          leftPosition = 35;
                           break;
                         default:
-                          topPosition = 75;
+                          topPosition = 85;
                           leftPosition = 45;
                       }
                       
