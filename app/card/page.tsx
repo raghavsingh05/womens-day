@@ -230,7 +230,7 @@ export default function CardPage() {
 
               {/* White Card with Answers - organized layout */}
               <div className="absolute inset-0 flex items-start justify-center">
-                <div className="mt-[8.5rem] sm:mt-48 relative w-[79%] h-[25%]">
+                <div className="mt-[10rem] sm:mt-48 relative w-[79%] h-[25%]">
                   {/* Pre-fixed words */}
                   <div 
                     className="absolute transform text-pink-500 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
