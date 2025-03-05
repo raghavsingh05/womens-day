@@ -3,21 +3,28 @@
 @tailwind utilities;
 
 @layer utilities {
-  @media (min-width: 380px) and (max-width: 390px) {
+  @media (min-width: 379px) and (max-width: 390px) {
     .mt-custom {
       margin-top: 10.2rem !important;
     }
   }
 }
 @layer utilities {
-  @media (min-width: 350px) and (max-width: 370px) {
+  @media (min-width: 355px) and (max-width: 370px) {
     .mt-customsmall {
       margin-top: 9.4rem !important;
     }
   }
 }
 @layer utilities {
-  @media (min-width: 370px) and (max-width: 380px) {
+  @media (min-width: 345px) and (max-width: 355px) {
+    .mt-customsmall {
+      margin-top: 9rem !important;
+    }
+  }
+}
+@layer utilities {
+  @media (min-width: 370px) and (max-width: 379px) {
     .mt-customsmall {
       margin-top: 9.7rem !important;
     }
