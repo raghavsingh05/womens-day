@@ -164,9 +164,9 @@ export default function CardPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-100 to-purple-200 py-6 px-3 md:py-8 md:px-4">
       <div className="container max-w-md mx-auto">
-        <h1 className="text-2xl md:text-4xl font-bold text-center mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+        {/* <h1 className="text-2xl md:text-4xl font-bold text-center mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
           Your Women's Day Card
-        </h1>
+        </h1> */}
 
         <div className="flex justify-center mb-6 md:mb-8">
           <div className="relative w-full max-w-[320px] md:max-w-md mx-auto">

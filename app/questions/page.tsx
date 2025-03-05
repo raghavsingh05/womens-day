@@ -71,7 +71,7 @@ export default function QuestionsPage() {
 
   const handleNext = () => {
     const trimmedAnswer = currentAnswer.trim()
-    const maxLength = currentQuestion === questions.length - 1 ? 25 : 20
+    const maxLength = currentQuestion === questions.length - 1 ? 25 : 15
     
     if (trimmedAnswer && trimmedAnswer.length <= maxLength) {
       setAnswers({ ...answers, [questions[currentQuestion].id]: trimmedAnswer })
@@ -101,7 +101,7 @@ export default function QuestionsPage() {
   }
 
   const isAnswerValid = () => {
-    const maxLength = currentQuestion === questions.length - 1 ? 25 : 20
+    const maxLength = currentQuestion === questions.length - 1 ? 25 : 15
     return currentAnswer.trim().length <= maxLength
   }
 
