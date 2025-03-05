@@ -305,7 +305,7 @@ export default function CardPage() {
                           leftPosition = 25;
                           break;
                         case 2:
-                          topPosition = 45;
+                          topPosition = 67;
                           leftPosition = 55;
                           break;
                         case 3:
