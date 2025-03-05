@@ -230,7 +230,7 @@ export default function CardPage() {
 
               {/* White Card with Answers - organized layout */}
               <div className="absolute inset-0 flex items-start justify-center">
-                <div className="mt-44 sm:mt-[13rem] mt-custom relative w-[79%] h-[25%]">
+                <div className="mt-44 sm:mt-[13rem] mt-customsmall mt-custom relative w-[79%] h-[25%]">
                   {Object.entries(answers).map(([key, answer]) => {
                     const index = parseInt(key) - 1
                     if (key !== "6") {

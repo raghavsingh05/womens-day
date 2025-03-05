@@ -3,9 +3,16 @@
 @tailwind utilities;
 
 @layer utilities {
-  @media (min-width: 350px) and (max-width: 400px) {
+  @media (min-width: 385px) and (max-width: 400px) {
     .mt-custom {
       margin-top: 10.2rem !important;
+    }
+  }
+}
+@layer utilities {
+  @media (min-width: 350px) and (max-width: 380px) {
+    .mt-customsmall {
+      margin-top: 9.5rem !important;
     }
   }
 }
