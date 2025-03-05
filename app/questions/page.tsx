@@ -15,7 +15,7 @@ const questions = [
     id: 1,
     question: "One wellness mantra you follow?",
     type: "text",
-    placeholder: "e.g., Meditation, Cold Showers, 10K steps a day, etc...",
+    placeholder: "e.g., Meditation, Showers, Walking, etc...",
   },
   {
     id: 2,
@@ -27,25 +27,25 @@ const questions = [
     id: 3,
     question: "What's the one thing that instantly uplifts your mood? ",
     type: "text",
-    placeholder: "e.g., Music, A good book, Talking to a friend, A long walk...",
+    placeholder: "e.g., Music, Reading, Talking, Walking...",
   },
   {
     id: 4,
     question: "Your favorite comfort food?",
     type: "text",
-    placeholder: "e.g., Rajma Chawal, Sushi, Pasta, Dosa...",
+    placeholder: "e.g., Sushi, Pasta, Dosa etc...",
   },
   {
     id: 5,
     question: "What is your passion outside medicine?",
     type: "text",
-    placeholder: "e.g., Classical Dance, Public speaking, Investing, Photography, Writing a book...",
+    placeholder: "e.g., Dancing, Speaking, Investing, Photography, etc...",
   },
   {
     id: 6,
     question: "What's the one piece of advice you'd give to your younger self?",
     type: "text",
-    placeholder: 'e.g., "Put yourself first sometimes," "Take more risks," "Save more, spend smart"...',
+    placeholder: 'e.g., "Be Yourself," "Take more risks," "Save more, spend smart"...',
   },
   
   
