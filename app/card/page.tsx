@@ -348,7 +348,7 @@ export default function CardPage() {
                     <div 
                       className="absolute top-[87%] left-1/2 transform -translate-x-1/2 -translate-y-1/2
                         text-lg sm:text-xl md:text-2xl text-pink-600 font-bold text-center
-                        max-w-[75%] z-20 tracking-wide"
+                        max-w-[100%] z-20 tracking-wide"
                       style={{
                         fontFamily: 'Poppins',
                         letterSpacing: '0.03em',
