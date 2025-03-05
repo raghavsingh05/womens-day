@@ -238,23 +238,23 @@ export default function CardPage() {
                       
                       switch(index) {
                         case 0:
-                          topPosition = 0;
+                          topPosition = 10;
                           leftPosition = 20;
                           break;
                         case 1:
-                          topPosition = 5;
+                          topPosition = 10;
                           leftPosition = 65;
                           break;
                         case 2:
-                          topPosition =45;
+                          topPosition =60;
                           leftPosition = 55;
                           break;
                         case 3:
-                          topPosition = 35;
+                          topPosition = 52;
                           leftPosition = 80;
                           break;
                         default:
-                          topPosition = 35;
+                          topPosition = 52;
                           leftPosition = 11;
                       }
                       
@@ -288,7 +288,7 @@ export default function CardPage() {
                   {/* Last answer (key 6) with special styling */}
                   {answers["6"] && (
                     <div 
-                      className="absolute top-[78%] left-1/2 w-full transform -translate-x-1/2 -translate-y-1/2
+                      className="absolute top-[88%] left-1/2 w-full transform -translate-x-1/2 -translate-y-1/2
                         text-lg sm:text-xl md:text-2xl text-pink-600 font-bold text-center
                         max-w-[100%] z-20 tracking-wide"
                       style={{
