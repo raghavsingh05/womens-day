@@ -163,7 +163,7 @@ export default function CardPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-100 to-purple-200 py-6 px-3 md:py-8 md:px-4">
-      <div className="container max-w-md mx-auto">
+      <div className="container  max-w-md mx-auto">
         {/* <h1 className="text-2xl md:text-4xl font-bold text-center mb-4 md:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
           Your Women's Day Card
         </h1> */}
@@ -230,7 +230,7 @@ export default function CardPage() {
 
               {/* White Card with Answers - organized layout */}
               <div className="absolute inset-0 flex items-start justify-center">
-                <div className="mt-44 sm:mt-[13rem] relative w-[79%] h-[25%]">
+                <div className="mt-44 sm:mt-[13rem] mt-custom relative w-[79%] h-[25%]">
                   {Object.entries(answers).map(([key, answer]) => {
                     const index = parseInt(key) - 1
                     if (key !== "6") {

@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  @media (min-width: 350px) and (max-width: 400px) {
+    .mt-custom {
+      margin-top: 9.5rem !important;
+    }
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
