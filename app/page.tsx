@@ -236,19 +236,13 @@ export default function Home() {
 
                       <p className="text-gray-700 leading-relaxed">
                         This Women's Day, let's celebrate you—your strength, your passion, and your dedication. At
-                        Biological E, we believe that true wellness comes from balance—in health, hormones, and
+                        <span className="font-semibold">  Biological E </span>, we believe that true wellness comes from balance—in health, hormones, and
                         happiness.
                       </p>
 
                       <p className="text-gray-700 leading-relaxed">
                         To honour this, we'd love to understand what inspires you, energizes you, and keeps you going
-                        through a short, fun survey. Your responses will help us support you better—not just as a
-                        doctor, but as the incredible woman you are.
-                      </p>
-
-                      <p className="text-gray-700 leading-relaxed">
-                        Once you complete the survey, you'll receive a personalized digital keepsake capturing your
-                        unique perspectives—because your voice deserves to be celebrated.
+                        through a short, fun survey.
                       </p>
                     </div>
 
