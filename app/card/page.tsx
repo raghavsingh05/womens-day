@@ -140,12 +140,12 @@ export default function CardPage() {
 
   // Font families for different answers
   const fontFamilies = [
-    'Dancing Script',
-    'Pacifico',
-    'Caveat',
-    'Satisfy',
-    'Great Vibes',
-    'Kalam',
+    'Inter',
+    'Inter',
+    'Inter',
+    'Inter',
+    'Inter',
+    'Inter',
   ]
 
   // Add this function to generate random size class
@@ -238,7 +238,7 @@ export default function CardPage() {
                       top: '10%',
                       left: '25%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Pacifico',
+                      fontFamily: 'Inter',
                       fontSize: '18px',
                       letterSpacing: '0.03em',
                       textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
@@ -252,7 +252,7 @@ export default function CardPage() {
                       top: '32%',
                       left: '75%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Great Vibes',
+                      fontFamily: 'Inter',
                       fontSize: '20px',
                       letterSpacing: '0.03em',
                       textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
@@ -263,10 +263,10 @@ export default function CardPage() {
                   <div 
                     className="absolute transform text-pink-800 hover:scale-105 cursor-default text-center tracking-wide hover:z-10"
                     style={{
-                      top: '55%',
+                      top: '50%',
                       left: '30%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Caveat',
+                      fontFamily: 'Inter',
                       fontSize: '19px',
                       letterSpacing: '0.03em',
                       textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
@@ -280,7 +280,7 @@ export default function CardPage() {
                       top: '75%',
                       left: '80%',
                       transform: 'translate(-50%, -50%) rotate(0deg)',
-                      fontFamily: 'Kalam',
+                      fontFamily: 'Inter',
                       fontSize: '18px',
                       letterSpacing: '0.03em',
                       textShadow: '1px 1px 1px rgba(0,0,0,0.05)'
@@ -305,7 +305,7 @@ export default function CardPage() {
                           leftPosition = 25;
                           break;
                         case 2:
-                          topPosition = 67;
+                          topPosition = 60;
                           leftPosition = 55;
                           break;
                         case 3:
@@ -313,7 +313,7 @@ export default function CardPage() {
                           leftPosition = 25;
                           break;
                         default:
-                          topPosition = 55;
+                          topPosition = 50;
                           leftPosition = 80;
                       }
                       
