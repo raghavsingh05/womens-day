@@ -238,11 +238,11 @@ export default function CardPage() {
                       
                       switch(index) {
                         case 0:
-                          topPosition = 10;
+                          topPosition = 12;
                           leftPosition = 20;
                           break;
                         case 1:
-                          topPosition = 10;
+                          topPosition = 18;
                           leftPosition = 65;
                           break;
                         case 2:
@@ -254,7 +254,7 @@ export default function CardPage() {
                           leftPosition = 80;
                           break;
                         default:
-                          topPosition = 52;
+                          topPosition = 49;
                           leftPosition = 11;
                       }
                       
@@ -271,7 +271,7 @@ export default function CardPage() {
                             left: `${leftPosition}%`,
                             transform: `translate(-50%, -50%) rotate(0deg)`,
                             fontFamily: fontFamilies[index % fontFamilies.length],
-                            fontSize: `${14 + (index % 3)}px`,
+                            fontSize: `${13 + (index % 3)}px`,
                             letterSpacing: '0.03em',
                             textShadow: '1px 1px 1px rgba(0,0,0,0.05)',
                             filter: 'drop-shadow(0 1px 1px rgba(0,0,0,0.05))',
