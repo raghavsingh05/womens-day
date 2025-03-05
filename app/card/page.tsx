@@ -297,11 +297,11 @@ export default function CardPage() {
                       
                       switch(index) {
                         case 0:
-                          topPosition = 25;
-                          leftPosition = 50;
+                          topPosition = 15;
+                          leftPosition = 75;
                           break;
                         case 1:
-                          topPosition = 45;
+                          topPosition = 40;
                           leftPosition = 25;
                           break;
                         case 2:
